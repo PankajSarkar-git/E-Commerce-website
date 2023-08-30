@@ -1,9 +1,14 @@
 import { useParams } from "react-router-dom";
 import useProductDetails from "../utills/useProductDetails";
 import ShimmerUi from "./ShimmerUi";
-import { ShoppingCart, StarHalf, Zap } from "lucide-react";
+import Star from "./Star";
 import { useDispatch } from "react-redux";
 import { addItems } from "../utills/cartSlice";
+import { ToastContainer } from "react-toastify";
+import { GrStar } from "react-icons/gr";
+import {  AiFillThunderbolt } from "react-icons/ai";
+import {  BsCartPlusFill } from "react-icons/bs";
+
 
 const ProductPage = () => {
   const { ProductId } = useParams();
@@ -11,14 +16,11 @@ const ProductPage = () => {
   const { image, category, description, id, price, rating, title } =
     productDetails;
 
-    // add cart 
-    const dispatch = useDispatch();
-    const addCartHandel = (productDetails) => {
-      dispatch(addItems(productDetails));
-    }
-
-
-
+  // add cart
+  const dispatch = useDispatch();
+  const addCartHandel = (productDetails) => {
+    dispatch(addItems(productDetails));
+  };
 
   return productDetails.length === 0 ? (
     <ShimmerUi />
@@ -38,32 +40,25 @@ const ProductPage = () => {
               <p className="font-serif py-2"> {description}</p>
 
               <div className=" py-4 flex gap-3 ">
-                <p
-                  className={
-                    rating.rate > 3.7
-                      ? "flex text-xl py-1 px-2 rounded-md w-fit bg-green-500"
-                      : "flex text-xl py-1 px-2 rounded-md w-fit bg-red-500"
-                  }
-                >
-                  {" "}
-                  <StarHalf />
-                  {rating.rate}
-                </p>
-                <p className=" font-bold text-xl pt-[6px]">
-                  {rating.count} -reviews
-                </p>
+              <Star star={rating.rate} reviews={rating.count}/>
               </div>
-              <p className="text-2xl font-bold">₹ : {price * 10}</p>
+              <p className="text-2xl font-bold">MRP : {price * 10}</p>
               <div className="flex justify-between w-full absolute bottom-0">
-                <div onClick={() => {addCartHandel(productDetails)}} className="h-16 w-[30%] rounded-lg cursor-pointer hover:bg-yellow-300 hover:text-gray-800 flex justify-center text-2xl items-center bg-gray-800 text-white uppercase">
-                  <ShoppingCart /> add to cart
+                <div
+                  onClick={() => {
+                    addCartHandel(productDetails);
+                  }}
+                  className="h-16 w-[30%] rounded-lg cursor-pointer hover:bg-yellow-300 hover:text-gray-800 flex justify-center text-2xl items-center bg-gray-800 text-white uppercase"
+                >
+                  <BsCartPlusFill />  add to cart
                 </div>
                 <div className="h-16 w-[30%] rounded-lg cursor-pointer hover:bg-yellow-300 hover:text-gray-800 flex justify-center text-2xl items-center bg-gray-800 text-white uppercase">
-                  <Zap /> buy Now
+                  <AiFillThunderbolt /> buy Now
                 </div>
               </div>
             </div>
           </div>
+          <ToastContainer />
         </div>
       </div>
     </>

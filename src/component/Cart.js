@@ -1,13 +1,16 @@
-import { Trash, Zap, StarHalf } from "lucide-react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { clearcart, removeItem } from "../utills/cartSlice";
+import { ToastContainer } from "react-toastify";
+import { MdDeleteOutline, MdStar } from "react-icons/md";
+import {  AiFillThunderbolt } from "react-icons/ai";
+
 
 const Cart = () => {
   const cartItems = useSelector((store) => {
     return store.cart.items;
   });
-
   const dispatch = useDispatch();
   const clearCartHandel = () => {
     dispatch(clearcart());
@@ -53,7 +56,7 @@ const Cart = () => {
                               : "flex text-xl py-1 px-2 rounded-md w-fit bg-red-500"
                           }
                         >
-                          <StarHalf />
+                          <MdStar />
                           {rating.rate}
                         </p>
                         <p className=" font-bold text-xl pt-[6px]">
@@ -70,7 +73,7 @@ const Cart = () => {
                         }}
                         className="h-16 w-full px-1 rounded-lg cursor-pointer hover:bg-yellow-300 hover:text-gray-800 flex justify-center text-lg items-center bg-gray-800 text-white uppercase"
                       >
-                        <Trash /> Clear cart
+                        <MdDeleteOutline /> Remove Item
                       </div>
                     </div>
                   </div>
@@ -91,12 +94,13 @@ const Cart = () => {
               onClick={clearCartHandel}
               className="h-16 w-[30%] rounded-lg cursor-pointer hover:bg-yellow-300 hover:text-gray-800 flex justify-center text-2xl items-center bg-gray-800 text-white uppercase"
             >
-              <Trash /> Clear cart
+              <MdDeleteOutline /> Clear cart
             </div>
             <div className="h-16 w-[30%] rounded-lg cursor-pointer hover:bg-yellow-300 hover:text-gray-800 flex justify-center text-2xl items-center bg-gray-800 text-white uppercase">
-              <Zap /> buy Now
+              <AiFillThunderbolt /> buy Now
             </div>
           </div>
+          <ToastContainer/>
         </div>
       </div>
     </>

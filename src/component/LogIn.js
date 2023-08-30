@@ -3,20 +3,23 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { logIn } from "../utills/authenticationSlice";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+// import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 const LogIn = () => {
   const [userName, SetUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [hidePassword, setHidePassword] = useState("password");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    if (localStorage.getItem('userName')) {
-      navigate("/")
+  useEffect(() => {
+    if (localStorage.getItem("userName")) {
+      navigate("/");
     }
-  })
+  });
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const authentication = (e) => {
     e.preventDefault();
@@ -40,9 +43,8 @@ const navigate = useNavigate();
                 theme: "colored",
               });
               localStorage.setItem("userName", userName);
-              dispatch(logIn())
+              dispatch(logIn());
               navigate("/");
-
             } else {
               toast.error("incorrect PassWord", {
                 position: "bottom-center",
@@ -84,6 +86,7 @@ const navigate = useNavigate();
       <div className="pt-[10vh] min-h-[80vh] min-w-full backdrop-blur-2xl bg-gray-400">
         <div className="px-28 h-[80vh] flex flex-col items-center justify-center ">
           <div className="flex flex-col items-center text-xl  bg-blue-200 border p-5 h-fit w-96 rounded-2xl">
+            <ToastContainer />
             <h3 className="text-2xl font-bold">Log in page</h3>
             <form action="" className="  " onSubmit={authentication}>
               <label>User Name :</label>
@@ -95,15 +98,18 @@ const navigate = useNavigate();
                 onChange={(e) => SetUserName(e.target.value)}
                 value={userName}
               />
+              <div className="relative">
               <label>Pasword :</label>
               <input
-                type="password"
+                type={hidePassword}
                 name=""
                 id=""
                 className="w-full bg-slate-400 text-2xl"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
+               {hidePassword === "password" ? <BsEyeFill onClick={()=> setHidePassword("text")} color="blue" className="absolute right-1 bottom-[5px] "/> :  <BsEyeSlashFill onClick={()=> setHidePassword("password")} color="blue" className="absolute right-1 bottom-[6px] "/>}
+              </div>
               <input
                 type="submit"
                 value="Log In"
@@ -117,7 +123,6 @@ const navigate = useNavigate();
             </form>
           </div>
         </div>
-        <ToastContainer />
       </div>
     </>
   );

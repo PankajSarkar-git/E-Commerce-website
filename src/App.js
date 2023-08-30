@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {logOut} from "./utills/authenticationSlice";
 import ProtectedRouteds from "./component/ProtectedRouteds";
+import { ToastContainer } from "react-toastify";
+import WishList from "./component/WishList";
 
 const App = () => {
   const authentication = useSelector((store) => {
@@ -30,7 +32,7 @@ const App = () => {
     }
   }, []);
 
-  console.log(authentication);
+
 
   return (
     <BrowserRouter>
@@ -42,9 +44,11 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/ProductList" element={<ItemCategory />} />
         <Route path="/Cart" element={<Cart />} />
+        <Route path="/Wishlist" element={<WishList />} />
         <Route path="/ProductList/:ProductId" element={<ProductPage />} />
         </Route>
       </Routes>
+      <ToastContainer/>
       <FooterSection />
     </BrowserRouter>
   );

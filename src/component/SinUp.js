@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 
 const SinUp = () => {
@@ -10,6 +11,7 @@ const SinUp = () => {
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setgender] = useState("");
+  const [hidePassword, setHidePassword] = useState("password");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -111,7 +113,7 @@ const SinUp = () => {
                   name="gender"
                   value="male"
                   onClick={(e) => setgender(e.target.value)}
-                />{" "}
+                />
                 <label className="pr-2">Male</label>
                 <input
                   type="radio"
@@ -121,16 +123,18 @@ const SinUp = () => {
                 />
                 <label>Female</label>
               </div>
+              <div className="relative">
               <label>Pasword :</label>
               <input
-                type="password"
+                type={hidePassword}
                 name=""
                 id=""
-                required
+                className="w-full bg-slate-400 text-2xl"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
-                className="w-full bg-slate-400 text-2xl"
-              />
+              /> 
+              {hidePassword === "password" ? <BsEyeFill onClick={()=> setHidePassword("text")} color="blue" className="absolute right-1 bottom-[5px] "/> :  <BsEyeSlashFill onClick={()=> setHidePassword("password")} color="blue" className="absolute right-1 bottom-[6px] "/>}
+              </div>
               <input
                 type="submit"
                 className="p-2 rounded-lg bg-green-500 my-5 mr-5"
