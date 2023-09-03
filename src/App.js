@@ -17,6 +17,7 @@ import {logOut} from "./utills/authenticationSlice";
 import ProtectedRouteds from "./component/ProtectedRouteds";
 import { ToastContainer } from "react-toastify";
 import WishList from "./component/WishList";
+import ProductList from "./component/ProductList";
 
 const App = () => {
   const authentication = useSelector((store) => {
@@ -42,7 +43,7 @@ const App = () => {
         <Route path="/sinup" element={<SinUp />} />
         <Route element={<ProtectedRouteds authentication={authentication} />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/ProductList" element={<ItemCategory />} />
+        <Route path="/ProductList" element={<ProductList />} />
         <Route path="/Cart" element={<Cart />} />
         <Route path="/Wishlist" element={<WishList />} />
         <Route path="/ProductList/:ProductId" element={<ProductPage />} />
