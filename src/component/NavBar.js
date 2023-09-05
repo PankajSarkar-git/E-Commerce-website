@@ -28,7 +28,7 @@ const Navbar = () => {
         <h3 className="text-xl tracking-wide text-white font-bold flex items-center ">
           Zap! Ecommerce
         </h3>
-       {authentication && <div className="flex items-center">
+       {/* {authentication && <div className="flex items-center">
           <input
             className="ml-5 w-96 h-10 text-2xl p-1 border border-white"
             type="text"
@@ -38,7 +38,7 @@ const Navbar = () => {
           <div className="bg-white p-[9] h-10">
             <BsSearch color="#230dc9" />
           </div>
-        </div>}
+        </div>} */}
         {authentication ? (
           <div className="flex justify-between w-auto items-center p-2">
             <li className="list-none text-lg text-white px-3 py-1 hover:bg-blue-200 hover:text-blue-700 rounded-lg">

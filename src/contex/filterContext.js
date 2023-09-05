@@ -7,6 +7,11 @@ const FilterContext = createContext();
 const initialState = {
   filter_products: [],
   all_products: [],
+  grid_viwe: false,
+  sorting_product: "default",
+  filters: {
+    text: "",
+  },
 };
 
 const FilterContextProvider = ({ children }) => {
@@ -17,9 +22,33 @@ const FilterContextProvider = ({ children }) => {
     dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products });
   }, [products]);
 
+  const setGridViwe = () => {
+    return dispatch({ type: "SET_GRID_VIWE" });
+  };
+  const setListViwe = () => {
+    return dispatch({ type: "SET_List_VIWE" });
+  };
+  const sorting = (e) => {
+    dispatch({ type: "GET_SHORT_VALUE", payload: e.target.value });
+  };
+
+  // filter
+
+  const updetFilterValue = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    return dispatch({ type:"UPDATE_FILTER_VALUE", payload:{ name, value } });
+  };
+
+  useEffect(() => {
+    dispatch({type: "UPDATE_FILTERS_PRODUCTS"})
+    dispatch({ type: "SHORTING_PRODUCTS" });
+  }, [state.sorting_product , state.filters]);
 
   return (
-    <FilterContext.Provider value={{ ...state }}>
+    <FilterContext.Provider
+      value={{ ...state, setGridViwe, setListViwe, sorting, updetFilterValue }}
+    >
       {children}
     </FilterContext.Provider>
   );

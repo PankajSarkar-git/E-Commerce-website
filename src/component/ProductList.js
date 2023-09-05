@@ -2,18 +2,15 @@ import React from "react";
 import Sort from "./Sort";
 import Product from "./Product";
 import FIlterSection from "./FIlterSection";
-import { useFilterContext } from "../contex/filterContext";
 
 const ProductList = () => {
-  const {filter_products} = useFilterContext();
-  console.log(filter_products);
   return (
     <div className="bg-gray-200 pt-[10vh] ">
-      <p className="p-2 flex-wrap pt-6 px-36 text-3xl">Our Store</p>
-    <div>
+    <div className="flex mt-10 px-28 gap-10">
+    <div className="h-[90vh] w-1/4 border border-red-600 ">
         <FIlterSection/>
     </div>
-      <section>
+      <section className="w-3/4 px-4">
         <div>
           <Sort />
         </div>
@@ -21,6 +18,8 @@ const ProductList = () => {
           <Product />
         </div>
       </section>
+    </div>
+   
     </div>
   );
 };
